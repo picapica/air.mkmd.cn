@@ -28,7 +28,7 @@ class AppController < Sinatra::Base
             title = item.xpath("title").text
             conc = item.xpath("Conc").text
             aqi = item.xpath("AQI").text
-            desc = item.xpath("Desc").text
+            desc = item.xpath("Desc").text.gsub(" (at 24-hour exposure at this level)", '')
             timestamp = item.xpath("ReadingDateTime").text
             timestamp = Time.parse(timestamp).to_i
 
