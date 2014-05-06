@@ -32,6 +32,8 @@ class AppController < Sinatra::Base
             timestamp = item.xpath("ReadingDateTime").text
             timestamp = Time.parse(timestamp).to_i
 
+            next if aqi.to_i < 0
+
             @info[:data] << {
               :city=> @city,
               :timestamp => timestamp,
