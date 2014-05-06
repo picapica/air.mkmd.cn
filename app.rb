@@ -34,12 +34,30 @@ class AppController < Sinatra::Base
 
             next if aqi.to_i < 0
 
+            aqi_level = case aqi.to_i
+            when 0..50
+              "aqi_1"
+            when 51..100
+              "aqi_2"
+            when 101..150
+              "aqi_3"
+            when 151..200
+              "aqi_4"
+            when 201..300
+              "aqi_5"
+            when 301..500
+              "aqi_6"
+            else
+              "aqi_7"
+            end
+
             @info[:data] << {
               :city=> @city,
               :timestamp => timestamp,
               :title => title,
               :conc => conc,
               :aqi => aqi,
+              :aqi_level => aqi_level,
               :desc => desc
             }
           end
