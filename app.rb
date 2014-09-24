@@ -30,7 +30,7 @@ class AppController < Sinatra::Base
             aqi = item.xpath("AQI").text
             desc = item.xpath("Desc").text.gsub(" (at 24-hour exposure at this level)", '')
             timestamp = item.xpath("ReadingDateTime").text
-            timestamp = Time.parse(timestamp).to_i
+            timestamp = Time.strptime(timestamp, '%m/%d/%Y %r').to_i
 
             next if aqi.to_i < 0
 
